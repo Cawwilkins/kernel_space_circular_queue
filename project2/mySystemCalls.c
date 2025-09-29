@@ -8,15 +8,39 @@ kqueue_421_t* queue = NULL;
 
 
 qnode_421_t* get_head_node(void) {
-  return NULL;
+	if (num_nodes < 1){
+  		return NULL;
+	} else {
+		return head;
+	}
 }
 
 qnode_421_t* get_tail_node(void) {
-  return NULL;
+	if (num_nodes < 1){
+		return NULL;
+	} else {
+		return tail;
+	}
 }
 
 qnode_421_t* dequeue(void) {
-  return NULL;
+	if (num_nodes < 1){
+		return NULL;
+	} else if (num_nodes == 1){
+		qnode_421_t* temp = head;
+		head = NULL;
+		tail = NULL;
+		num_nodes--;
+		return temp;
+	} else {
+		head = head->next;
+			if (num_nodes == 2){
+				tail = head;
+			}
+		num_nodes--;
+		return temp;
+	}
+	return NULL;
 }
 
 void enqueue(qnode_421_t* node) {
