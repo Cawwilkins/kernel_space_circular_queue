@@ -1381,4 +1381,14 @@ int __sys_getsockopt(int fd, int level, int optname, char __user *optval,
 		int __user *optlen);
 int __sys_setsockopt(int fd, int level, int optname, char __user *optval,
 		int optlen);
+
+asmlinkage long queue_init(void);
+
+asmlinkage long queue_free(void);
+
+asmlinkage qnode_421_t* dequeue(void);
+
+asmlinkage void enqueue(qnode_421_t* node);
+
 #endif
+

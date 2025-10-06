@@ -24,13 +24,16 @@ qnode_421_t* get_tail_node(void) {
 }
 
 qnode_421_t* dequeue(void) {
-	if (num_nodes < 1){
-		return NULL;
+	if (kqueue_421_t == NULL){
+		return -EPERM;
+	} else if (num_nodes < 1 || head == NULL){
+		return -ENOENT;
 	} else if (num_nodes == 1){
 		qnode_421_t* temp = head;
 		head = NULL;
 		tail = NULL;
 		num_nodes--;
+		kfree(temp);
 		return temp;
 	} else {
 		head = head->next;
@@ -38,31 +41,64 @@ qnode_421_t* dequeue(void) {
 				tail = head;
 			}
 		num_nodes--;
+		kfree(temp);
 		return temp;
 	}
 	return NULL;
 }
 
 void enqueue(qnode_421_t* node) {
-  return;
+	if (num_nodes < 1) {
+		head = node;
+		tail = node;
+		num_nodes++;
+		return;
+	} else if (num_nodes == 1) {
+		head->next = node;
+		tail = node;
+		num_nodes++;
+		return;
+	} else {
+		tail->next = node;
+		tail = node;
+		num_nodes++;
+  		return;
+	return;
 }
 
 long queue_init(void) {
-  return -1;
+	if (head || tail || num_nodes > 0){
+		return -1;
+	}
+	else {
+		head = NULL;
+		tail = NULL;
+		num_nodes = 0;
+		return 0;
+	}
 }
 
 long queue_free(void) {
-  return -1;
+	if (kqueue_421_t == NULL){
+		return 1;
+	}
+	while (head != NULL){
+		kfree(dequeue());
+	}
+	head = NULL;
+	tail = NULL;
+	num_nodes = 0;
+	return 0;
 }
 
 // kernel-space initializer.
 SYSCALL_DEFINE0(kern_queue_init) {
-  return -1;
+	return kern_queue_init;
 }
 
 // kernel-space free-er.
 SYSCALL_DEFINE0(kern_queue_free) {
-  return -1;
+	return kern_queue_free;
 }
 
 /**
@@ -72,7 +108,19 @@ SYSCALL_DEFINE0(kern_queue_free) {
  * RETURN VALUE: should be 0 on success, 1 otherwise.
  */
 SYSCALL_DEFINE1(kern_dequeue, void __user*, dest) {
-  return -1;
+	if (kqueue_421_t == NULL){
+		return -EPERM;
+	} else if (kqueue_421_t->num_nodes < 1 || kqueue_421_t->head == NULL){
+		return -ENOENT;
+	}
+	// EDIT TO MATCH SPEC AB CHECKING BEFORE REMOVING
+	qnode_421_t* topOfQueue = dequeue();
+	if (copy_to_user(dest, topOfQueue, sizeof(qnode_421_t))) {
+		return -ENXIO;
+	} else {
+		kfree(temp);
+		return 0;
+	}
 }
 
 /**
@@ -82,5 +130,17 @@ SYSCALL_DEFINE1(kern_dequeue, void __user*, dest) {
  * RETURN VALUE: should be 0 on success, 1 otherwise.
  */
 SYSCALL_DEFINE1(kern_enqueue, void __user*, node) {
-  return -1;
+	qnode_421_t* newNode = kmalloc(sizeof(qnode_421_t), GFP_KERNEL);
+	if (!newNode){
+		return -ENOMEM;
+	}
+	if (kqueue_421_t == NULL || kqueue_421_t->head == NULL || kqueue_421_t->num_nodes <) {
+		return 2;
+	}
+	if (copy_from_user(newNode, node, sizeof(qnode_421_t))) {
+		kfree(temp);
+		return -EIO;
+	}
+	enqueue(newNode);
+	return 0;
 }

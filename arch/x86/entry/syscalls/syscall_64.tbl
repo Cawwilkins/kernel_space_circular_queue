@@ -415,3 +415,7 @@
 547	x32	pwritev2		compat_sys_pwritev64v2
 # This is the end of the legacy x32 range.  Numbers 548 and above are
 # not special and are not to be used for x32-specific syscalls.
+600	common	queue_init		kern_queue_init
+601	common	queue_free		kern_queue_free
+602	common	dequeue			kern_dequeue
+603	common	enqueue			kern_enqueue
