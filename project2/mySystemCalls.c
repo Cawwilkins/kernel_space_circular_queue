@@ -8,39 +8,35 @@ kqueue_421_t* queue = NULL;
 
 
 qnode_421_t* get_head_node(void) {
-	if (num_nodes < 1){
+	if (queue->num_nodes < 1){
   		return NULL;
 	} else {
-		return head;
+		return queue->head;
 	}
 }
 
 qnode_421_t* get_tail_node(void) {
-	if (num_nodes < 1){
+	if (queue->num_nodes < 1){
 		return NULL;
 	} else {
-		return tail;
+		return queue->tail;
 	}
 }
 
 qnode_421_t* dequeue(void) {
-	if (kqueue_421_t == NULL){
-		return -EPERM;
-	} else if (num_nodes < 1 || head == NULL){
-		return -ENOENT;
-	} else if (num_nodes == 1){
-		qnode_421_t* temp = head;
-		head = NULL;
-		tail = NULL;
-		num_nodes--;
+	qnode_421_t* temp = queue->head;
+	if (queue->num_nodes == 1) {
+		queue->head = NULL;
+		queue->tail = NULL;
+		queue->num_nodes--;
 		kfree(temp);
 		return temp;
 	} else {
-		head = head->next;
-			if (num_nodes == 2){
-				tail = head;
+		queue->head = queue->head->next;
+			if (queue->num_nodes == 2){
+				queue->tail = queue->head;
 			}
-		num_nodes--;
+		queue->num_nodes--;
 		kfree(temp);
 		return temp;
 	}
@@ -48,57 +44,61 @@ qnode_421_t* dequeue(void) {
 }
 
 void enqueue(qnode_421_t* node) {
-	if (num_nodes < 1) {
-		head = node;
-		tail = node;
-		num_nodes++;
+	if (queue->num_nodes < 1) {
+		queue->head = node;
+		queue->tail = node;
+		queue->num_nodes++;
 		return;
-	} else if (num_nodes == 1) {
-		head->next = node;
-		tail = node;
-		num_nodes++;
+	} else if (queue->num_nodes == 1) {
+		queue->head->next = node;
+		queue->tail = node;
+		queue->num_nodes++;
 		return;
 	} else {
-		tail->next = node;
-		tail = node;
-		num_nodes++;
+		queue->tail->next = node;
+		queue->tail = node;
+		queue->num_nodes++;
   		return;
+	}
 	return;
 }
 
 long queue_init(void) {
-	if (head || tail || num_nodes > 0){
+	if (queue->head || queue->tail || queue->num_nodes > 0){
 		return -1;
 	}
 	else {
-		head = NULL;
-		tail = NULL;
-		num_nodes = 0;
+		queue->head = NULL;
+		queue->tail = NULL;
+		queue->num_nodes = 0;
 		return 0;
 	}
+	return -1;
 }
 
 long queue_free(void) {
-	if (kqueue_421_t == NULL){
+	if (queue == NULL){
 		return 1;
 	}
-	while (head != NULL){
+	while (queue->head != NULL){
 		kfree(dequeue());
 	}
-	head = NULL;
-	tail = NULL;
-	num_nodes = 0;
+	queue->head = NULL;
+	queue->tail = NULL;
+	queue->num_nodes = 0;
 	return 0;
 }
 
 // kernel-space initializer.
 SYSCALL_DEFINE0(kern_queue_init) {
-	return kern_queue_init;
+	int result = queue_init();
+	return result;
 }
 
 // kernel-space free-er.
 SYSCALL_DEFINE0(kern_queue_free) {
-	return kern_queue_free;
+	int result = queue_free();
+	return result;
 }
 
 /**
@@ -108,19 +108,27 @@ SYSCALL_DEFINE0(kern_queue_free) {
  * RETURN VALUE: should be 0 on success, 1 otherwise.
  */
 SYSCALL_DEFINE1(kern_dequeue, void __user*, dest) {
-	if (kqueue_421_t == NULL){
+	qnode_421_t* toBeRemoved;
+	qnode_421_t* topOfQueue;
+	if (queue == NULL){
+		kfree(toBeRemoved);
+		kfree(topOfQueue);
 		return -EPERM;
-	} else if (kqueue_421_t->num_nodes < 1 || kqueue_421_t->head == NULL){
+	} else if (queue->num_nodes < 1 || queue->head == NULL){
+		kfree(toBeRemoved);
+		kfree(topOfQueue);
 		return -ENOENT;
 	}
-	// EDIT TO MATCH SPEC AB CHECKING BEFORE REMOVING
-	qnode_421_t* topOfQueue = dequeue();
+	topOfQueue = queue->head;
 	if (copy_to_user(dest, topOfQueue, sizeof(qnode_421_t))) {
+		kfree(topOfQueue);
+		kfree(toBeRemoved);
 		return -ENXIO;
-	} else {
-		kfree(temp);
-		return 0;
 	}
+	kfree(topOfQueue);
+	toBeRemoved = dequeue();
+	kfree(toBeRemoved);
+	return 0;
 }
 
 /**
@@ -134,11 +142,11 @@ SYSCALL_DEFINE1(kern_enqueue, void __user*, node) {
 	if (!newNode){
 		return -ENOMEM;
 	}
-	if (kqueue_421_t == NULL || kqueue_421_t->head == NULL || kqueue_421_t->num_nodes <) {
+	if (queue == NULL || queue->head == NULL || queue->num_nodes < 1) {
 		return 2;
 	}
 	if (copy_from_user(newNode, node, sizeof(qnode_421_t))) {
-		kfree(temp);
+		kfree(newNode);
 		return -EIO;
 	}
 	enqueue(newNode);

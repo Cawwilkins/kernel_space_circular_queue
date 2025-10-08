@@ -1,0 +1,1 @@
+cmd_/usr/src/project-2/project2-fa25-Cawwilkins/tools/objtool/arch/x86/objtool-in.o :=  ld -r -o /usr/src/project-2/project2-fa25-Cawwilkins/tools/objtool/arch/x86/objtool-in.o  /usr/src/project-2/project2-fa25-Cawwilkins/tools/objtool/arch/x86/special.o /usr/src/project-2/project2-fa25-Cawwilkins/tools/objtool/arch/x86/decode.o
