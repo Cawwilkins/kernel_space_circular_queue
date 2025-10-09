@@ -29,7 +29,6 @@ qnode_421_t* dequeue(void) {
 		queue->head = NULL;
 		queue->tail = NULL;
 		queue->num_nodes--;
-		kfree(temp);
 		return temp;
 	} else {
 		queue->head = queue->head->next;
@@ -37,7 +36,6 @@ qnode_421_t* dequeue(void) {
 				queue->tail = queue->head;
 			}
 		queue->num_nodes--;
-		kfree(temp);
 		return temp;
 	}
 	return NULL;
@@ -64,16 +62,18 @@ void enqueue(qnode_421_t* node) {
 }
 
 long queue_init(void) {
-	if (queue->head || queue->tail || queue->num_nodes > 0){
-		return -1;
-	}
-	else {
+	if (queue != NULL) {
+		if (queue->head || queue->tail || queue->num_nodes > 0){
+			return 1;
+		}
+	} else {
+		queue = kmalloc(sizeof(kqueue_421_t), GFP_KERNEL);
 		queue->head = NULL;
 		queue->tail = NULL;
 		queue->num_nodes = 0;
 		return 0;
 	}
-	return -1;
+	return 1;
 }
 
 long queue_free(void) {
@@ -86,6 +86,8 @@ long queue_free(void) {
 	queue->head = NULL;
 	queue->tail = NULL;
 	queue->num_nodes = 0;
+	kfree(queue);
+	queue = NULL;
 	return 0;
 }
 
@@ -142,7 +144,7 @@ SYSCALL_DEFINE1(kern_enqueue, void __user*, node) {
 	if (!newNode){
 		return -ENOMEM;
 	}
-	if (queue == NULL || queue->head == NULL || queue->num_nodes < 1) {
+	if (queue == NULL) {
 		return 2;
 	}
 	if (copy_from_user(newNode, node, sizeof(qnode_421_t))) {
