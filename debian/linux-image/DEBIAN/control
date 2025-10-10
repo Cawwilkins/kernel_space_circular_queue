@@ -1,12 +1,12 @@
-Package: linux-image-5.15.67+
+Package: linux-image-5.15.67-cmsc421-project2-cwilkin2+
 Source: linux-upstream
-Version: 5.15.67+-5
+Version: 5.15.67-cmsc421-project2-cwilkin2+-8
 Architecture: amd64
 Maintainer: vboxuser <vboxuser@CMSC-421.myguest.virtualbox.org>
-Installed-Size: 22200
+Installed-Size: 22204
 Section: kernel
 Priority: optional
 Homepage: https://www.kernel.org/
-Description: Linux kernel, version 5.15.67+
+Description: Linux kernel, version 5.15.67-cmsc421-project2-cwilkin2+
  This package contains the Linux kernel, modules and corresponding other
- files, version: 5.15.67+.
+ files, version: 5.15.67-cmsc421-project2-cwilkin2+.

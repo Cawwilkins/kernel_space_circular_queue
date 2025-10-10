@@ -1,13 +1,13 @@
-Package: linux-headers-5.15.67+
+Package: linux-headers-5.15.67-cmsc421-project2-cwilkin2+
 Source: linux-upstream
-Version: 5.15.67+-5
+Version: 5.15.67-cmsc421-project2-cwilkin2+-8
 Architecture: amd64
 Maintainer: vboxuser <vboxuser@CMSC-421.myguest.virtualbox.org>
-Installed-Size: 46994
+Installed-Size: 47246
 Section: kernel
 Priority: optional
 Homepage: https://www.kernel.org/
-Description: Linux kernel headers for 5.15.67+ on amd64
- This package provides kernel header files for 5.15.67+ on amd64
+Description: Linux kernel headers for 5.15.67-cmsc421-project2-cwilkin2+ on amd64
+ This package provides kernel header files for 5.15.67-cmsc421-project2-cwilkin2+ on amd64
  .
  This is useful for people who need to build external modules

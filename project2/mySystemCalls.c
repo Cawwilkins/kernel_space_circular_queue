@@ -110,26 +110,19 @@ SYSCALL_DEFINE0(kern_queue_free) {
  * RETURN VALUE: should be 0 on success, 1 otherwise.
  */
 SYSCALL_DEFINE1(kern_dequeue, void __user*, dest) {
-	qnode_421_t* toBeRemoved;
-	qnode_421_t* topOfQueue;
 	if (queue == NULL){
-		kfree(toBeRemoved);
-		kfree(topOfQueue);
 		return -EPERM;
 	} else if (queue->num_nodes < 1 || queue->head == NULL){
-		kfree(toBeRemoved);
-		kfree(topOfQueue);
 		return -ENOENT;
 	}
-	topOfQueue = queue->head;
+
+	qnode_421_t* topOfQueue = queue->head;
+
 	if (copy_to_user(dest, topOfQueue, sizeof(qnode_421_t))) {
-		kfree(topOfQueue);
-		kfree(toBeRemoved);
 		return -ENXIO;
 	}
+	dequeue();
 	kfree(topOfQueue);
-	toBeRemoved = dequeue();
-	kfree(toBeRemoved);
 	return 0;
 }
 
