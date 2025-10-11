@@ -1,9 +1,9 @@
 Package: linux-headers-5.15.67-cmsc421-project2-cwilkin2+
 Source: linux-upstream
-Version: 5.15.67-cmsc421-project2-cwilkin2+-8
+Version: 5.15.67-cmsc421-project2-cwilkin2+-11
 Architecture: amd64
 Maintainer: vboxuser <vboxuser@CMSC-421.myguest.virtualbox.org>
-Installed-Size: 47246
+Installed-Size: 47574
 Section: kernel
 Priority: optional
 Homepage: https://www.kernel.org/
