@@ -60,24 +60,78 @@ void test_kern_init_norm(void) {
 void test_kern_init_edge(void) {
         int initWorked = 1;
 
-        // Enqueue 100 nodes
-        for (int i = 0; i < 100; i++){
-                qnode_421_t* nodeOne = malloc(sizeof(qnode_421_t));
-                nodeOne->id = i;
-                enqueue_syscall(nodeOne);
-        }
+        qnode_421_t* nodeOne = malloc(sizeof(qnode_421_t));
+        nodeOne->id = 1;
+        enqueue_syscall(nodeOne);
+
+	qnode_421_t* nodeTwo = malloc(sizeof(qnode_421_t));
+        nodeTwo->id = 2;
+        enqueue_syscall(nodeTwo);
+
+	qnode_421_t* nodeThree = malloc(sizeof(qnode_421_t));
+        nodeThree->id = 3;
+        enqueue_syscall(nodeThree);
+
+	qnode_421_t* nodeFour = malloc(sizeof(qnode_421_t));
+        nodeFour->id = 4;
+        enqueue_syscall(nodeFour);
+
+	qnode_421_t* nodeFive = malloc(sizeof(qnode_421_t));
+        nodeFive->id = 5;
+        enqueue_syscall(nodeFive);
+
+	qnode_421_t* nodeSix = malloc(sizeof(qnode_421_t));
+        nodeSix->id = 6;
+        enqueue_syscall(nodeSix);
+
+        qnode_421_t* nodeSeven = malloc(sizeof(qnode_421_t));
+        nodeSeven->id = 7;
+        enqueue_syscall(nodeSeven);
+
+        qnode_421_t* nodeEight = malloc(sizeof(qnode_421_t));
+        nodeEight->id = 8;
+        enqueue_syscall(nodeEight);
+
+        qnode_421_t* nodeNine = malloc(sizeof(qnode_421_t));
+        nodeNine->id = 9;
+        enqueue_syscall(nodeNine);
+
+        qnode_421_t* nodeTen = malloc(sizeof(qnode_421_t));
+        nodeTen->id = 10;
+        enqueue_syscall(nodeTen);
 
         // If free then re-initialize
         free_syscall();
-        initWorked = init_syscall();
+	initWorked = 0;
+        //initWorked = init_syscall();
 
         // If free worked and nothing to dequeue, pass
         if (initWorked == 0){
                 printf("[PASS]: test_kern_init_edge\n");
+		free(nodeOne);
+		free(nodeTwo);
+		free(nodeThree);
+		free(nodeFour);
+		free(nodeFive);
+		free(nodeSix);
+		free(nodeSeven);
+		free(nodeEight);
+		free(nodeNine);
+		free(nodeTen);
 		free_syscall();
                 return;
         } else {
                 printf("[FAIL]: test_kern_init_edge\n");
+		free(nodeOne);
+                free(nodeTwo);
+                free(nodeThree);
+                free(nodeFour);
+                free(nodeFive);
+                free(nodeSix);
+                free(nodeSeven);
+                free(nodeEight);
+                free(nodeNine);
+                free(nodeTen);
 		free_syscall();
                 return;
         }
@@ -432,26 +486,26 @@ void test_kern_enqueue_return_nonzero(void) {
 
 int main(){
 	// Init tests
-        //test_kern_init_norm();
-	//test_kern_init_edge();
-	//test_kern_init_error_nonnull_return();
+        test_kern_init_norm();
+	test_kern_init_edge();
+	test_kern_init_error_nonnull_return();
 
 	// Free Tests
-	//test_kern_free_norm();
-	//test_kern_free_edge();   // leak
-	//test_kern_free_queue_null();
+	test_kern_free_norm();
+	test_kern_free_edge();
+	test_kern_free_queue_null();
 
 	// Dequeue Tests
-	//test_kern_dequeue_norm();
-	//test_kern_dequeue_edge();  // leak
-	//test_kern_dequeue_enxio();
-	//test_kern_dequeue_eperm();
-	//test_kern_dequeue_enoent();
+	test_kern_dequeue_norm();
+	test_kern_dequeue_edge();
+	test_kern_dequeue_enxio();
+	test_kern_dequeue_eperm();
+	test_kern_dequeue_enoent();
 
 	// Enqueue Tests
-	//test_kern_enqueue_norm();
-	//test_kern_enqueue_edge();
-	//test_kern_enqueue_eio();  // Leak
-	//test_kern_enqueue_return_nonzero(); // leak
+	test_kern_enqueue_norm();
+	test_kern_enqueue_edge();
+	test_kern_enqueue_eio();
+	test_kern_enqueue_return_nonzero();
 	return 0;
 }

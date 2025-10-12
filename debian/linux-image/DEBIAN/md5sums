@@ -1,5 +1,5 @@
 e0a22b9eaf13f2390c37bf5ecd0d7108  usr/share/doc/linux-image-5.15.67-cmsc421-project2-cwilkin2+/copyright
-d498eed892d37fc2a48081778069ac76  usr/share/doc/linux-image-5.15.67-cmsc421-project2-cwilkin2+/changelog.Debian.gz
+36d00d8e9ececca127e7f2b1b2b03f0d  usr/share/doc/linux-image-5.15.67-cmsc421-project2-cwilkin2+/changelog.Debian.gz
 3b2818da035c9159cbe9864ec93f5318  lib/modules/5.15.67-cmsc421-project2-cwilkin2+/modules.alias.bin
 ae5ae5d200471f46805a792f87c247be  lib/modules/5.15.67-cmsc421-project2-cwilkin2+/modules.symbols.bin
 3c44159596e7992ff30401e3193eeb17  lib/modules/5.15.67-cmsc421-project2-cwilkin2+/modules.dep.bin
@@ -80,6 +80,6 @@ c8c8bc11bc17b69023e325ee1be997fa  lib/modules/5.15.67-cmsc421-project2-cwilkin2+
 b45ce1f01e9d0382321ecc071c90dfcd  lib/modules/5.15.67-cmsc421-project2-cwilkin2+/kernel/arch/x86/events/rapl.ko
 f0f6c7fc903bc32c5ac9ddd0854fa264  lib/modules/5.15.67-cmsc421-project2-cwilkin2+/modules.dep
 bcda0f1a7c436270e5865abe4d30b71b  lib/modules/5.15.67-cmsc421-project2-cwilkin2+/modules.symbols
-ffcae1c24d5a8aef038b5e3e620967b6  boot/System.map-5.15.67-cmsc421-project2-cwilkin2+
-02ade5031848dafa928802ea1b3f1901  boot/vmlinuz-5.15.67-cmsc421-project2-cwilkin2+
+c7fccfcd181bea48f9687c2f09696c20  boot/System.map-5.15.67-cmsc421-project2-cwilkin2+
+1a7adc90b4dbe93ef6fe038b4ed967e8  boot/vmlinuz-5.15.67-cmsc421-project2-cwilkin2+
 9f88e1f4bbe56c70bba5b51814079ed2  boot/config-5.15.67-cmsc421-project2-cwilkin2+

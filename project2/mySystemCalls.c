@@ -138,12 +138,14 @@ SYSCALL_DEFINE1(kern_enqueue, void __user*, node) {
 		return -ENOMEM;
 	}
 	if (queue == NULL) {
+		kfree(newNode);
 		return 2;
 	}
 	if (copy_from_user(newNode, node, sizeof(qnode_421_t))) {
 		kfree(newNode);
 		return -EIO;
 	}
+	newNode->next = NULL;
 	enqueue(newNode);
 	return 0;
 }

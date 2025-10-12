@@ -1,5 +1,5 @@
 e0a22b9eaf13f2390c37bf5ecd0d7108  usr/share/doc/linux-headers-5.15.67-cmsc421-project2-cwilkin2+/copyright
-d498eed892d37fc2a48081778069ac76  usr/share/doc/linux-headers-5.15.67-cmsc421-project2-cwilkin2+/changelog.Debian.gz
+36d00d8e9ececca127e7f2b1b2b03f0d  usr/share/doc/linux-headers-5.15.67-cmsc421-project2-cwilkin2+/changelog.Debian.gz
 9f88e1f4bbe56c70bba5b51814079ed2  usr/src/linux-headers-5.15.67-cmsc421-project2-cwilkin2+/.config
 06c3a694dfa4db03ad1c446a7ecc2f58  usr/src/linux-headers-5.15.67-cmsc421-project2-cwilkin2+/scripts/get_abi.pl
 eaf2f301d169692604f4fad822936339  usr/src/linux-headers-5.15.67-cmsc421-project2-cwilkin2+/scripts/checkpatch.pl
@@ -7542,7 +7542,7 @@ d33ad8c81ceff898fd0348f1eaf04217  usr/src/linux-headers-5.15.67-cmsc421-project2
 b6e82f97800c471274a672f152e790ea  usr/src/linux-headers-5.15.67-cmsc421-project2-cwilkin2+/include/keys/asymmetric-parser.h
 f6925456e210718426c99018593bd173  usr/src/linux-headers-5.15.67-cmsc421-project2-cwilkin2+/include/generated/bounds.h
 9540e44a1e16b341b3dd8628ac94ca70  usr/src/linux-headers-5.15.67-cmsc421-project2-cwilkin2+/include/generated/autoconf.h
-1143ab6134e4fbb9c89d1158c611911a  usr/src/linux-headers-5.15.67-cmsc421-project2-cwilkin2+/include/generated/compile.h
+d8e576aba85ac0792241f1ce4ef47b22  usr/src/linux-headers-5.15.67-cmsc421-project2-cwilkin2+/include/generated/compile.h
 3212f0ef26a48bf66c19274fac1668c7  usr/src/linux-headers-5.15.67-cmsc421-project2-cwilkin2+/include/generated/utsrelease.h
 ee306ebc91ce35466ff4abc99577117d  usr/src/linux-headers-5.15.67-cmsc421-project2-cwilkin2+/include/generated/timeconst.h
 e24e3e805ee8e34425ffb105635f6c32  usr/src/linux-headers-5.15.67-cmsc421-project2-cwilkin2+/include/generated/uapi/linux/version.h
